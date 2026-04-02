@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeHer — Your Safety, Your Power</title>
+
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+
+  <!-- Bootstrap Icons (CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  />
+
+  <!-- Font Awesome (CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* ── CSS Custom Properties ── */
+    :root {
+      /* Color Palette */
+      --color-primary:       #6a0dad;   /* Deep Purple */
+      --color-primary-dark:  #4a0080;
+      --color-primary-light: #9b4dca;
+      --color-secondary:     #008080;   /* Teal */
+      --color-secondary-light: #00b3b3;
+      --color-accent-blue:   #0066ff;   /* Electric Blue */
+      --color-accent-orange: #ff6600;   /* Orange */
+
+      /* Neutral / Surface */
+      --color-bg:            #f8f5ff;
+      --color-surface:       rgba(255, 255, 255, 0.65);
+      --color-text:          #1a1a2e;
+      --color-text-muted:    #555577;
+
+      /* Glassmorphism */
+      --glass-bg:            rgba(255, 255, 255, 0.15);
+      --glass-border:        rgba(255, 255, 255, 0.3);
+      --glass-blur:          blur(12px);
+
+      /* Gradients */
+      --gradient-hero:       linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      --gradient-sos:        linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-accent-blue) 100%);
+
+      /* Transitions */
+      --transition-base:     all 0.3s ease;
+    }
+
+    /* ── Dark Mode Overrides ── */
+    html.dark {
+      --color-bg:          #0d0d1a;
+      --color-surface:     rgba(30, 20, 50, 0.75);
+      --color-text:        #e8e0f0;
+      --color-text-muted:  #a090c0;
+      --glass-bg:          rgba(20, 10, 40, 0.4);
+      --glass-border:      rgba(150, 100, 200, 0.3);
+    }
+
+    /* ── Base ── */
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition-base);
+    }
+
+    #navbar .navbar-brand {
+      font-weight: 700;
+      font-size: 1.4rem;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    #navbar .nav-link {
+      color: var(--color-text) !important;
+      font-weight: 500;
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      transition: var(--transition-base);
+    }
+
+    #navbar .nav-link:hover {
+      color: var(--color-primary-light) !important;
+      background: rgba(106, 13, 173, 0.1);
+    }
+
+    #navbar .navbar-toggler {
+      border-color: var(--glass-border);
+    }
+
+    #navbar .navbar-toggler-icon {
+      filter: invert(0.5);
+    }
+
+    #navbar .btn-dark-toggle {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--color-text);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-base);
+      padding: 0;
+    }
+
+    #navbar .btn-dark-toggle:hover {
+      background: rgba(106, 13, 173, 0.15);
+      border-color: var(--color-primary-light);
+      color: var(--color-primary-light);
+    }
+
+    #navbar .dropdown-menu {
+      background: var(--color-surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+    }
+
+    #navbar .dropdown-item {
+      color: var(--color-text);
+      transition: var(--transition-base);
+    }
+
+    #navbar .dropdown-item:hover {
+      background: rgba(106, 13, 173, 0.1);
+      color: var(--color-primary-light);
+    }
+
+    /* ── Hero Section ── */
+    #home {
+      min-height: 100vh;
+      background: var(--gradient-hero);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Decorative abstract shapes */
+    #home::before,
+    #home::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    #home::before {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--color-secondary-light), transparent 70%);
+      top: -150px;
+      right: -150px;
+    }
+
+    #home::after {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--color-accent-blue), transparent 70%);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .hero-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    .hero-shape-1 {
+      width: 300px;
+      height: 300px;
+      border: 3px solid var(--color-secondary-light);
+      top: 10%;
+      left: 5%;
+      animation: heroFloat 8s ease-in-out infinite;
+    }
+
+    .hero-shape-2 {
+      width: 200px;
+      height: 200px;
+      border: 2px solid var(--color-accent-blue);
+      bottom: 15%;
+      right: 8%;
+      animation: heroFloat 10s ease-in-out infinite reverse;
+    }
+
+    .hero-shape-3 {
+      width: 150px;
+      height: 150px;
+      background: var(--color-primary-light);
+      top: 60%;
+      left: 15%;
+      animation: heroFloat 12s ease-in-out infinite;
+    }
+
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%       { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      padding: 2rem 1rem;
+      max-width: 720px;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-content p {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--color-accent-orange);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.85rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(255, 102, 0, 0.45);
+      transition: var(--transition-base);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero-cta:hover,
+    .hero-cta:focus {
+      background: var(--color-accent-blue);
+      box-shadow: 0 8px 28px rgba(0, 102, 255, 0.5);
+      transform: translateY(-3px) scale(1.04);
+      outline: none;
+    }
+
+    /* ── SOS Section ── */
+    #sos {
+      background: var(--gradient-sos);
+      padding: 5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+
+    .sos-inner {
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .sos-inner h2 {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .sos-inner p.sos-subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.82);
+      margin-bottom: 2.5rem;
+    }
+
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.7); }
+      70%  { box-shadow: 0 0 0 28px rgba(255, 102, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0); }
+    }
+
+    #sosBtn {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--color-accent-orange);
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      border: 4px solid rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      animation: pulse 1.8s ease-out infinite;
+      transition: var(--transition-base);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.25rem;
+      box-shadow: 0 8px 32px rgba(255, 102, 0, 0.45);
+    }
+
+    #sosBtn:hover,
+    #sosBtn:focus {
+      background: #e65c00;
+      transform: scale(1.07);
+      outline: 3px solid rgba(255, 255, 255, 0.6);
+      outline-offset: 4px;
+    }
+
+    #sosBtn .sos-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    #sosCoords,
+    #sosAlert {
+      display: none;
+      margin-top: 1.75rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    #sosCoords {
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+
+    /* Placeholder — will be filled in subsequent tasks */
+
+    /* ── Safety Tools Section ── */
+    #safety-tools {
+      background: var(--color-bg);
+      padding: 5rem 1rem;
+    }
+
+    #safety-tools .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    #safety-tools .section-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Glassmorphism card base */
+    .safety-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      height: 100%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(106, 13, 173, 0.08);
+    }
+
+    .safety-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(106, 13, 173, 0.2);
+    }
+
+    .safety-card .card-icon {
+      font-size: 2rem;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+
+    .safety-card .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+    }
+
+    /* Checklist items */
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.95rem;
+      color: var(--color-text);
+    }
+
+    .checklist-item .bi {
+      color: var(--color-secondary);
+      font-size: 1.05rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Map placeholder */
+    .map-placeholder {
+      height: 200px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .map-placeholder .map-icon {
+      font-size: 2.5rem;
+      opacity: 0.9;
+    }
+
+    /* Report form */
+    .report-form .form-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+
+    .report-form .form-control,
+    .report-form .form-select {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid var(--glass-border);
+      color: var(--color-text);
+      border-radius: 8px;
+      transition: var(--transition-base);
+    }
+
+    html.dark .report-form .form-control,
+    html.dark .report-form .form-select {
+      background: rgba(30, 20, 50, 0.5);
+      color: var(--color-text);
+    }
+
+    .report-form .form-control:focus,
+    .report-form .form-select:focus {
+      border-color: var(--color-primary-light);
+      box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.15);
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .report-form .btn-submit {
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.55rem 1.5rem;
+      font-weight: 600;
+      transition: var(--transition-base);
+    }
+
+    .report-form .btn-submit:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(106, 13, 173, 0.35);
+    }
+
+    #reportConfirmation {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      background: rgba(0, 128, 128, 0.15);
+      border: 1px solid var(--color-secondary);
+      color: var(--color-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* ── Blog Section ── */
+    #blog {
+      background: linear-gradient(160deg, #f0eaff 0%, #e8f4f4 100%);
+      padding: 5rem 1rem;
+    }
+
+    html.dark #blog {
+      background: linear-gradient(160deg, #130a24 0%, #0a1a1a 100%);
+    }
+
+    #blog .blog-section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    #blog .blog-section-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 0;
+    }
+
+    /* Blog card */
+    .blog-card {
+      background: var(--color-surface);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(106, 13, 173, 0.08);
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(106, 13, 173, 0.2);
+    }
+
+    /* Image placeholder */
+    .blog-img-placeholder {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .blog-img-tips {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    }
+
+    .blog-img-awareness {
+      background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent-blue) 100%);
+    }
+
+    .blog-img-stories {
+      background: linear-gradient(135deg, var(--color-accent-blue) 0%, var(--color-primary-light) 100%);
+    }
+
+    .blog-img-icon {
+      font-size: 3rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Card body */
+    .blog-card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .blog-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .blog-card-desc {
+      font-size: 0.93rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Read More button */
+    .blog-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--color-accent-blue);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0.5rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 3px 12px rgba(0, 102, 255, 0.3);
+    }
+
+    .blog-read-more:hover,
+    .blog-read-more:focus {
+      background: var(--color-accent-orange);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(255, 102, 0, 0.4);
+      outline: none;
+    }
+
+    /* ── Community Section ── */
+    #community {
+      background: linear-gradient(160deg, #e8f4f4 0%, #f0eaff 100%);
+      padding: 5rem 1rem;
+    }
+
+    html.dark #community {
+      background: linear-gradient(160deg, #0a1a1a 0%, #130a24 100%);
+    }
+
+    #community .community-section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: var(--color-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    #community .community-section-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Submission form */
+    .community-form-wrap {
+      background: var(--color-surface);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0, 128, 128, 0.08);
+    }
+
+    #communityInput {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid var(--glass-border);
+      color: var(--color-text);
+      border-radius: 10px;
+      resize: vertical;
+      transition: var(--transition-base);
+      font-size: 0.97rem;
+    }
+
+    html.dark #communityInput {
+      background: rgba(30, 20, 50, 0.5);
+      color: var(--color-text);
+    }
+
+    #communityInput:focus {
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.15);
+      background: rgba(255, 255, 255, 0.8);
+      outline: none;
+    }
+
+    #communitySubmit {
+      background: var(--color-secondary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.55rem 1.75rem;
+      font-weight: 600;
+      font-size: 0.97rem;
+      transition: var(--transition-base);
+    }
+
+    #communitySubmit:hover,
+    #communitySubmit:focus {
+      background: var(--color-secondary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 128, 128, 0.35);
+      outline: none;
+    }
+
+    #communityValidation {
+      display: none;
+      margin-top: 0.6rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      background: rgba(255, 102, 0, 0.1);
+      border: 1px solid var(--color-accent-orange);
+      color: var(--color-accent-orange);
+      font-size: 0.9rem;
+    }
+
+    /* Post cards */
+    .community-post {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 18px rgba(0, 128, 128, 0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .community-post:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 128, 128, 0.15);
+    }
+
+    .community-post-text {
+      font-size: 0.97rem;
+      color: var(--color-text);
+      line-height: 1.65;
+      margin-bottom: 0.5rem;
+    }
+
+    .community-post-time {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ── Footer ── */
+    #contact {
+      background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary) 100%);
+      padding: 4rem 1rem 2rem;
+      color: #fff;
+    }
+
+    .footer-inner {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .footer-col-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .footer-nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-nav-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-nav-links a {
+      color: rgba(255, 255, 255, 0.78);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: var(--transition-base);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .footer-nav-links a:hover,
+    .footer-nav-links a:focus {
+      color: #fff;
+      transform: translateX(4px);
+      outline: none;
+    }
+
+    .footer-helpline-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-helpline-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .footer-helpline-list .helpline-icon {
+      font-size: 1.1rem;
+      color: var(--color-accent-orange);
+      flex-shrink: 0;
+    }
+
+    .footer-helpline-list .helpline-number {
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.05rem;
+    }
+
+    .footer-social-row {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer-social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: #fff;
+      font-size: 1.15rem;
+      text-decoration: none;
+      transition: var(--transition-base);
+    }
+
+    .footer-social-link:hover,
+    .footer-social-link:focus {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-3px) scale(1.1);
+      color: #fff;
+      outline: none;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 0;
+    }
+
+    /* ── Scroll-triggered Fade-in Animations ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ════════════════════════════════════════════ -->
+  <nav id="navbar" class="navbar navbar-expand-lg" aria-label="Main navigation">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="#home">
+        <i class="bi bi-shield-heart-fill me-1"></i>SafeHer
+      </a>
+
+      <!-- Hamburger toggle -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+
+        <!-- Nav links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sos">SOS</a></li>
+          <li class="nav-item"><a class="nav-link" href="#safety-tools">Safety Tools</a></li>
+          <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="#community">Community</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Right-side controls -->
+        <div class="d-flex align-items-center gap-2">
+
+          <!-- Language Selector -->
+          <div class="dropdown">
+            <button
+              class="btn btn-sm dropdown-toggle"
+              type="button"
+              id="languageDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--color-text); border-radius: 6px;"
+            >
+              <i class="bi bi-globe2 me-1"></i>
+              <span id="langLabel">English</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+              <li><a class="dropdown-item" href="#" data-lang="English">English</a></li>
+              <li><a class="dropdown-item" href="#" data-lang="Hindi">Hindi</a></li>
+              <li><a class="dropdown-item" href="#" data-lang="Spanish">Spanish</a></li>
+            </ul>
+          </div>
+
+          <!-- Dark Mode Toggle -->
+          <button
+            id="darkModeToggle"
+            class="btn-dark-toggle"
+            aria-label="Toggle dark mode"
+            title="Toggle dark mode"
+          >
+            <i class="bi bi-moon-fill" id="darkModeIcon"></i>
+          </button>
+
+        </div>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION: Home / Hero
+  ════════════════════════════════════════════ -->
+  <section id="home" aria-label="Hero">
+    <!-- Decorative floating shapes -->
+    <div class="hero-shape hero-shape-1" aria-hidden="true"></div>
+    <div class="hero-shape hero-shape-2" aria-hidden="true"></div>
+    <div class="hero-shape hero-shape-3" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <h1>Your Safety, Your Power</h1>
+      <p>
+        SafeHer gives you instant access to emergency help, location sharing, and a
+        supportive community — all in one place. Stay prepared, stay connected, stay safe.
+      </p>
+      <button
+        class="hero-cta"
+        onclick="document.querySelector('#sos').scrollIntoView({ behavior: 'smooth' })"
+        aria-label="Activate SOS — scroll to emergency section"
+      >
+        <i class="bi bi-shield-exclamation me-2"></i>Activate SOS
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION: SOS
+  ════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════
+       SECTION: SOS
+  ════════════════════════════════════════════ -->
+  <section id="sos" aria-label="SOS Emergency">
+    <div class="sos-inner">
+      <h2><i class="bi bi-shield-exclamation me-2" aria-hidden="true"></i>Emergency SOS</h2>
+      <p class="sos-subtitle">Press the button below to share your location and alert your emergency contacts.</p>
+
+      <button
+        id="sosBtn"
+        type="button"
+        aria-label="Activate SOS emergency alert"
+      >
+        <span class="sos-icon" aria-hidden="true"><i class="bi bi-exclamation-triangle-fill"></i></span>
+        SOS
+      </button>
+
+      <!-- Coordinate display — hidden until geolocation succeeds -->
+      <div id="sosCoords" role="status" aria-live="polite" aria-label="Location coordinates"></div>
+
+      <!-- Alert / status message — hidden until triggered -->
+      <div id="sosAlert" role="alert" aria-live="assertive"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION: Safety Tools
+  ════════════════════════════════════════════ -->
+  <section id="safety-tools" aria-label="Safety Tools">
+    <div class="container">
+
+      <!-- Section heading -->
+      <div class="text-center mb-4">
+        <h2 class="section-title">
+          <i class="bi bi-shield-check me-2" aria-hidden="true"></i>Safety Tools
+        </h2>
+        <p class="section-subtitle">Resources to keep you prepared, informed, and protected.</p>
+      </div>
+
+      <!-- Three-card row -->
+      <div class="row g-4">
+
+        <!-- Card 1: Emergency Checklist -->
+        <div class="col-md-4">
+          <div class="safety-card" role="region" aria-label="Emergency Checklist">
+            <div class="card-icon" aria-hidden="true">
+              <i class="bi bi-clipboard2-check-fill"></i>
+            </div>
+            <h3 class="card-title">Emergency Checklist</h3>
+            <ul class="list-unstyled mb-0" aria-label="Preparedness checklist">
+              <li class="checklist-item">
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                <span>Keep emergency contacts saved</span>
+              </li>
+              <li class="checklist-item">
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                <span>Carry a personal alarm</span>
+              </li>
+              <li class="checklist-item">
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                <span>Know your nearest police station</span>
+              </li>
+              <li class="checklist-item">
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                <span>Keep phone charged</span>
+              </li>
+              <li class="checklist-item">
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                <span>Share location with trusted contacts</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 2: Nearby Help -->
+        <div class="col-md-4">
+          <div class="safety-card" role="region" aria-label="Nearby Help">
+            <div class="card-icon" aria-hidden="true">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <h3 class="card-title">Nearby Help</h3>
+            <div class="map-placeholder" aria-label="Map placeholder — Nearby Help coming soon">
+              <i class="bi bi-pin-map-fill map-icon" aria-hidden="true"></i>
+              <span>Map placeholder — Nearby Help coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Report Unsafe Area -->
+        <div class="col-md-4">
+          <div class="safety-card" role="region" aria-label="Report Unsafe Area">
+            <div class="card-icon" aria-hidden="true">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+            <h3 class="card-title">Report Unsafe Area</h3>
+            <form id="reportForm" class="report-form" novalidate>
+              <div class="mb-3">
+                <label for="reportLocation" class="form-label">Location Description</label>
+                <textarea
+                  id="reportLocation"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Describe the location or area..."
+                  aria-required="true"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="reportType" class="form-label">Incident Type</label>
+                <select id="reportType" class="form-select" aria-required="true">
+                  <option value="" disabled selected>Select incident type</option>
+                  <option value="harassment">Harassment</option>
+                  <option value="unsafe-lighting">Unsafe Lighting</option>
+                  <option value="suspicious-activity">Suspicious Activity</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-submit w-100">
+                <i class="bi bi-send-fill me-1" aria-hidden="true"></i>Submit Report
+              </button>
+              <div id="reportConfirmation" role="alert" aria-live="polite">
+                <i class="bi bi-check-circle me-1" aria-hidden="true"></i>
+                Thank you — your report has been recorded.
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION: Blog
+  ════════════════════════════════════════════ -->
+  <section id="blog" aria-label="Safety Blog">
+    <div class="container">
+
+      <!-- Section heading -->
+      <div class="text-center mb-5">
+        <h2 class="blog-section-title">
+          <i class="bi bi-journal-richtext me-2" aria-hidden="true"></i>Safety Blog
+        </h2>
+        <p class="blog-section-subtitle">Stay informed, stay empowered — tips, awareness, and real stories.</p>
+      </div>
+
+      <!-- Blog cards row -->
+      <div class="row g-4">
+
+        <!-- Card 1: Safety Tips -->
+        <div class="col-md-4">
+          <article class="blog-card h-100" aria-label="Blog post: 5 Safety Tips Every Woman Should Know">
+            <div class="blog-img-placeholder blog-img-tips" aria-hidden="true">
+              <i class="bi bi-shield-check blog-img-icon"></i>
+            </div>
+            <div class="blog-card-body">
+              <h3 class="blog-card-title">5 Safety Tips Every Woman Should Know</h3>
+              <p class="blog-card-desc">
+                From staying aware of your surroundings to using safety apps effectively,
+                these practical tips can make a real difference in your daily life.
+              </p>
+              <button class="blog-read-more" type="button" aria-label="Read more about safety tips">
+                Read More <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Card 2: Awareness -->
+        <div class="col-md-4">
+          <article class="blog-card h-100" aria-label="Blog post: Raising Awareness: Understanding Street Harassment">
+            <div class="blog-img-placeholder blog-img-awareness" aria-hidden="true">
+              <i class="bi bi-megaphone-fill blog-img-icon"></i>
+            </div>
+            <div class="blog-card-body">
+              <h3 class="blog-card-title">Raising Awareness: Understanding Street Harassment</h3>
+              <p class="blog-card-desc">
+                Street harassment affects millions of women every day. Learn how to
+                recognize it, respond safely, and advocate for change in your community.
+              </p>
+              <button class="blog-read-more" type="button" aria-label="Read more about street harassment awareness">
+                Read More <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Card 3: Real Stories -->
+        <div class="col-md-4">
+          <article class="blog-card h-100" aria-label="Blog post: Real Stories: How SafeHer Helped Me Feel Safer">
+            <div class="blog-img-placeholder blog-img-stories" aria-hidden="true">
+              <i class="bi bi-heart-fill blog-img-icon"></i>
+            </div>
+            <div class="blog-card-body">
+              <h3 class="blog-card-title">Real Stories: How SafeHer Helped Me Feel Safer</h3>
+              <p class="blog-card-desc">
+                Hear from women who used SafeHer in real situations. Their experiences
+                highlight the power of community, preparedness, and quick access to help.
+              </p>
+              <button class="blog-read-more" type="button" aria-label="Read more real stories">
+                Read More <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION: Community
+  ════════════════════════════════════════════ -->
+  <section id="community" aria-label="Community">
+    <div class="container">
+
+      <!-- Section heading -->
+      <div class="text-center mb-4">
+        <h2 class="community-section-title">
+          <i class="bi bi-people-fill me-2" aria-hidden="true"></i>Community
+        </h2>
+        <p class="community-section-subtitle">Share your experiences, tips, and support with others.</p>
+      </div>
+
+      <!-- Submission form (above feed) -->
+      <div class="community-form-wrap">
+        <label for="communityInput" class="form-label fw-semibold mb-2" style="color: var(--color-text-muted); font-size: 0.9rem;">
+          Share something with the community
+        </label>
+        <textarea
+          id="communityInput"
+          class="form-control mb-2"
+          rows="3"
+          placeholder="Write a tip, share an experience, or offer support..."
+          aria-label="Community message input"
+        ></textarea>
+        <div id="communityValidation" role="alert" aria-live="polite">
+          <i class="bi bi-exclamation-circle me-1" aria-hidden="true"></i>
+          Please enter a message before posting.
+        </div>
+        <button id="communitySubmit" type="button" class="mt-2" aria-label="Submit community post">
+          <i class="bi bi-send-fill me-1" aria-hidden="true"></i>Post
+        </button>
+      </div>
+
+      <!-- Community feed -->
+      <div id="communityFeed" aria-label="Community feed" aria-live="polite">
+
+        <!-- Sample post 1 -->
+        <div class="community-post">
+          <p class="community-post-text">Staying safe starts with community. Always let someone know where you're going. 💜</p>
+          <span class="community-post-time"><i class="bi bi-clock me-1" aria-hidden="true"></i>2 hours ago</span>
+        </div>
+
+        <!-- Sample post 2 -->
+        <div class="community-post">
+          <p class="community-post-text">I started using SafeHer last month and it's given me so much peace of mind. Highly recommend sharing it with friends!</p>
+          <span class="community-post-time"><i class="bi bi-clock me-1" aria-hidden="true"></i>5 hours ago</span>
+        </div>
+
+        <!-- Sample post 3 -->
+        <div class="community-post">
+          <p class="community-post-text">Reminder: trust your instincts. If something feels off, it probably is. Your safety always comes first.</p>
+          <span class="community-post-time"><i class="bi bi-clock me-1" aria-hidden="true"></i>Yesterday</span>
+        </div>
+
+      </div><!-- /#communityFeed -->
+    </div><!-- /.container -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER: Contact
+  ════════════════════════════════════════════ -->
+  <footer id="contact" aria-label="Footer">
+    <div class="container">
+
+      <!-- Glassmorphism inner panel -->
+      <div class="footer-inner">
+        <div class="row g-4">
+
+          <!-- Column 1: Brand + Tagline -->
+          <div class="col-lg-4 col-md-12">
+            <div class="footer-brand">
+              <i class="bi bi-shield-heart-fill" aria-hidden="true"></i>SafeHer
+            </div>
+            <p class="footer-tagline">
+              Empowering women with instant access to emergency help, safety tools,
+              and a supportive community — all in one place.
+            </p>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-col-title">
+              <i class="bi bi-link-45deg me-1" aria-hidden="true"></i>Quick Links
+            </h3>
+            <ul class="footer-nav-links">
+              <li><a href="#home"><i class="bi bi-house-fill" aria-hidden="true"></i>Home</a></li>
+              <li><a href="#sos"><i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>SOS</a></li>
+              <li><a href="#safety-tools"><i class="bi bi-shield-check" aria-hidden="true"></i>Safety Tools</a></li>
+              <li><a href="#blog"><i class="bi bi-journal-richtext" aria-hidden="true"></i>Blog</a></li>
+              <li><a href="#community"><i class="bi bi-people-fill" aria-hidden="true"></i>Community</a></li>
+              <li><a href="#contact"><i class="bi bi-envelope-fill" aria-hidden="true"></i>Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Emergency Helplines -->
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-col-title">
+              <i class="bi bi-telephone-fill me-1" aria-hidden="true"></i>Emergency Helplines
+            </h3>
+            <ul class="footer-helpline-list">
+              <li>
+                <i class="bi bi-shield-fill-check helpline-icon" aria-hidden="true"></i>
+                <span>Women Helpline: <span class="helpline-number">1091</span></span>
+              </li>
+              <li>
+                <i class="bi bi-badge-po-fill helpline-icon" aria-hidden="true"></i>
+                <span>Police: <span class="helpline-number">100</span></span>
+              </li>
+              <li>
+                <i class="bi bi-heart-pulse-fill helpline-icon" aria-hidden="true"></i>
+                <span>Ambulance: <span class="helpline-number">102</span></span>
+              </li>
+            </ul>
+          </div>
+
+        </div><!-- /.row -->
+
+        <!-- Social Media Icons -->
+        <div class="footer-social-row" aria-label="Social media links">
+          <a
+            href="#"
+            class="footer-social-link"
+            aria-label="Follow us on Twitter / X"
+            title="Twitter / X"
+          >
+            <i class="bi bi-twitter-x" aria-hidden="true"></i>
+          </a>
+          <a
+            href="#"
+            class="footer-social-link"
+            aria-label="Follow us on Instagram"
+            title="Instagram"
+          >
+            <i class="bi bi-instagram" aria-hidden="true"></i>
+          </a>
+          <a
+            href="#"
+            class="footer-social-link"
+            aria-label="Follow us on Facebook"
+            title="Facebook"
+          >
+            <i class="bi bi-facebook" aria-hidden="true"></i>
+          </a>
+        </div>
+
+      </div><!-- /.footer-inner -->
+
+      <!-- Copyright -->
+      <p class="footer-copyright">
+        &copy; 2024 SafeHer. Empowering women, one step at a time.
+      </p>
+
+    </div><!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle (CDN) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmFXFMrWCU3FA6Ld0noQns/k4wPR"
+    crossorigin="anonymous"
+  ></script>
+
+  <script>
+    // ── Application Script ──
+
+    // ── Dark Mode — Apply stored preference immediately (before first paint) ──
+    (function() {
+      var stored = localStorage.getItem('theme');
+      var icon   = document.getElementById('darkModeIcon');
+      if (stored === 'dark') {
+        document.documentElement.classList.add('dark');
+        if (icon) {
+          icon.classList.remove('bi-moon-fill');
+          icon.classList.add('bi-sun-fill');
+        }
+      } else {
+        document.documentElement.classList.remove('dark');
+        if (icon) {
+          icon.classList.remove('bi-sun-fill');
+          icon.classList.add('bi-moon-fill');
+        }
+      }
+    })();
+
+    // ── Dark Mode Toggle — click handler ──
+    document.getElementById('darkModeToggle').addEventListener('click', function() {
+      var html = document.documentElement;
+      var icon = document.getElementById('darkModeIcon');
+      if (html.classList.toggle('dark')) {
+        localStorage.setItem('theme', 'dark');
+        icon.classList.remove('bi-moon-fill');
+        icon.classList.add('bi-sun-fill');
+      } else {
+        localStorage.setItem('theme', 'light');
+        icon.classList.remove('bi-sun-fill');
+        icon.classList.add('bi-moon-fill');
+      }
+    });
+
+    // ── SOS Button — Geolocation Logic ──
+    document.getElementById('sosBtn').addEventListener('click', function() {
+      var sosAlert  = document.getElementById('sosAlert');
+      var sosCoords = document.getElementById('sosCoords');
+
+      // Reset visibility
+      sosAlert.style.display  = 'none';
+      sosCoords.style.display = 'none';
+
+      // Check for Geolocation API support
+      if (!navigator.geolocation) {
+        sosAlert.textContent    = 'Geolocation is not supported by your browser.';
+        sosAlert.style.display  = 'block';
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        // Success callback
+        function(position) {
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+          sosCoords.textContent   = 'Latitude: ' + lat + ' | Longitude: ' + lng;
+          sosCoords.style.display = 'block';
+          sosAlert.textContent    = 'Location sent to emergency contacts';
+          sosAlert.style.display  = 'block';
+        },
+        // Error callback
+        function(error) {
+          if (error.code === 1) {
+            // PERMISSION_DENIED
+            sosAlert.textContent = 'Location access was denied. Please enable location permissions.';
+          } else {
+            sosAlert.textContent = 'Location is currently unavailable. Please try again.';
+          }
+          sosCoords.style.display = 'none';
+          sosAlert.style.display  = 'block';
+        }
+      );
+    });
+
+    // Language Selector — UI only, updates label on selection
+    document.querySelectorAll('[data-lang]').forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('langLabel').textContent = this.dataset.lang;
+      });
+    });
+
+    // Report Unsafe Area — client-side confirmation, no network request
+    document.getElementById('reportForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var confirmation = document.getElementById('reportConfirmation');
+      confirmation.style.display = 'block';
+      this.reset();
+    });
+    // Community Feed — post submission
+    document.getElementById('communitySubmit').addEventListener('click', function() {
+      var input      = document.getElementById('communityInput');
+      var validation = document.getElementById('communityValidation');
+      var feed       = document.getElementById('communityFeed');
+      var text       = input.value.trim();
+
+      if (!text) {
+        validation.style.display = 'block';
+        input.focus();
+        return;
+      }
+
+      validation.style.display = 'none';
+
+      // Build new post card
+      var post = document.createElement('div');
+      post.className = 'community-post';
+      post.innerHTML =
+        '<p class="community-post-text">' + text.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>' +
+        '<span class="community-post-time"><i class="bi bi-clock me-1" aria-hidden="true"></i>Just now</span>';
+
+      // Prepend to feed
+      feed.insertBefore(post, feed.firstChild);
+      input.value = '';
+    });
+
+    // ── Scroll-triggered Fade-in Animations (IntersectionObserver) ──
+    (function() {
+      var sections = ['#home', '#sos', '#safety-tools', '#blog', '#community', '#contact'];
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      sections.forEach(function(selector) {
+        var el = document.querySelector(selector);
+        if (el) {
+          el.classList.add('fade-in');
+          observer.observe(el);
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
